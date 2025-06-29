@@ -5,42 +5,32 @@
       <h1>Gerenciador de Tarefas</h1>
     </div>
     
-    <!--<nav class="nav">
+    <nav class="nav">
       <ul class="nav-list">
         <li class="nav-item">
-          <a href="#" 
-             class="nav-link" 
-             [class.active]="activeNavItem === 'home'"
-             (click)="onNavClick('home'); $event.preventDefault()">
+          <a routerLink="/home" 
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             class="nav-link">
             Início
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" 
-             class="nav-link" 
-             [class.active]="activeNavItem === 'tasks'"
-             (click)="onNavClick('tasks'); $event.preventDefault()">
-            Tarefas
+          <a routerLink="/about" 
+             routerLinkActive="active"
+             class="nav-link">
+            Sobre
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" 
-             class="nav-link" 
-             [class.active]="activeNavItem === 'projects'"
-             (click)="onNavClick('projects'); $event.preventDefault()">
-            Projetos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" 
-             class="nav-link" 
-             [class.active]="activeNavItem === 'profile'"
-             (click)="onNavClick('profile'); $event.preventDefault()">
-            Perfil
+          <a routerLink="/contact" 
+             routerLinkActive="active"
+             class="nav-link">
+            Contato
           </a>
         </li>
       </ul>
-    </nav>-->
+    </nav>
 
     <div class="header-actions">
       <!-- Barra de Pesquisa -->

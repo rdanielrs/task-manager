@@ -20,7 +20,6 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   // Estado do componente
-  public currentNavItem = 'home';
   public tasks: Task[] = [];
   public filteredTasks: Task[] = [];
   public taskStats = {
@@ -84,10 +83,6 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     console.log('Componente home recebeu evento:', event);
 
     switch (event.type) {
-      case 'navigation':
-        this.currentNavItem = event.data.navItem;
-        break;
-
       case 'newTask':
         this.showNewTaskForm = true;
         break;

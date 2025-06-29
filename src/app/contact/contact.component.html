@@ -1,0 +1,139 @@
+<!-- Componente Cabeçalho -->
+<app-header></app-header>
+
+<div class="contact-page">
+  <div class="container">
+    <!-- Cabeçalho da página -->
+    <section class="page-header">
+      <h1>Entre em Contato</h1>
+      <p class="subtitle">Estamos aqui para ajudar! Entre em contato conosco</p>
+    </section>
+
+    <div class="contact-content">
+      <!-- Informações de contato -->
+      <section class="contact-info">
+        <h2>Informações de Contato</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">📧</div>
+            <h3>Email</h3>
+            <p>{{ contactInfo.email }}</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <h3>Telefone</h3>
+            <p>{{ contactInfo.phone }}</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <h3>Endereço</h3>
+            <p>{{ contactInfo.address }}</p>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">🕒</div>
+            <h3>Horário de Funcionamento</h3>
+            <p>{{ contactInfo.workingHours }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulário de contato -->
+      <section class="contact-form-section">
+        <h2>Envie uma Mensagem</h2>
+        <div class="form-container">
+          <form (ngSubmit)="submitForm()" #contactFormElement="ngForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Nome *</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name"
+                  [(ngModel)]="contactForm.name" 
+                  required
+                  class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email"
+                  [(ngModel)]="contactForm.email" 
+                  required
+                  class="form-input">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Assunto *</label>
+              <input 
+                type="text" 
+                id="subject" 
+                name="subject"
+                [(ngModel)]="contactForm.subject" 
+                required
+                class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Mensagem *</label>
+              <textarea 
+                id="message" 
+                name="message"
+                [(ngModel)]="contactForm.message" 
+                rows="5"
+                required
+                class="form-input"
+                placeholder="Digite sua mensagem aqui..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" [disabled]="!contactFormElement.form.valid">
+                Enviar Mensagem
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Redes sociais -->
+      <section class="social-section">
+        <h2>Redes Sociais</h2>
+        <div class="social-grid">
+          <a 
+            *ngFor="let social of socialLinks" 
+            [href]="social.url" 
+            target="_blank"
+            class="social-card">
+            <div class="social-icon">{{ social.icon }}</div>
+            <h3>{{ social.name }}</h3>
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>Como posso começar a usar o Gerenciador de Tarefas?</h3>
+            <p>Basta criar uma conta e começar a adicionar suas tarefas. O sistema é intuitivo e fácil de usar.</p>
+          </div>
+          <div class="faq-item">
+            <h3>O sistema é gratuito?</h3>
+            <p>Sim, oferecemos uma versão gratuita com funcionalidades básicas. Para recursos avançados, temos planos premium.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Posso usar em dispositivos móveis?</h3>
+            <p>Sim! O Gerenciador de Tarefas é totalmente responsivo e funciona perfeitamente em smartphones e tablets.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Como funciona o sistema de prioridades?</h3>
+            <p>Você pode definir prioridades baixa, média ou alta para suas tarefas, ajudando a organizar melhor seu trabalho.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div> 

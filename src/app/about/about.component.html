@@ -1,0 +1,81 @@
+<!-- Componente Cabeçalho -->
+<app-header></app-header>
+
+<div class="about-page">
+  <div class="container">
+    <!-- Cabeçalho da página -->
+    <section class="page-header">
+      <h1>Sobre o Projeto</h1>
+      <p class="subtitle">Conheça mais sobre o Gerenciador de Tarefas</p>
+    </section>
+
+    <!-- Informações do projeto -->
+    <section class="project-info">
+      <div class="info-card">
+        <h2>{{ projectInfo.name }}</h2>
+        <p class="version">Versão {{ projectInfo.version }}</p>
+        <p class="description">{{ projectInfo.description }}</p>
+      </div>
+    </section>
+
+    <!-- Funcionalidades -->
+    <section class="features-section">
+      <h2>Funcionalidades Principais</h2>
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of projectInfo.features">
+          <div class="feature-icon">✓</div>
+          <h3>{{ feature }}</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologias utilizadas -->
+    <section class="technologies-section">
+      <h2>Tecnologias Utilizadas</h2>
+      <div class="tech-grid">
+        <div class="tech-card" *ngFor="let tech of projectInfo.technologies">
+          <div class="tech-icon">🔧</div>
+          <h3>{{ tech }}</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Padrões de Design -->
+    <section class="patterns-section">
+      <h2>Padrões de Design Implementados</h2>
+      <div class="patterns-grid">
+        <div class="pattern-card">
+          <h3>Observer Pattern</h3>
+          <p>Comunicação entre componentes usando RxJS Observables</p>
+        </div>
+        <div class="pattern-card">
+          <h3>Singleton Pattern</h3>
+          <p>Serviços com instância única gerenciada pelo Angular DI</p>
+        </div>
+        <div class="pattern-card">
+          <h3>Service Pattern</h3>
+          <p>Separação de lógica de negócio em serviços reutilizáveis</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Objetivos do projeto -->
+    <section class="objectives-section">
+      <h2>Objetivos do Projeto</h2>
+      <div class="objectives-list">
+        <div class="objective-item">
+          <h3>Demonstrar Padrões de Design</h3>
+          <p>Implementar e demonstrar o uso de padrões de design em aplicações Angular</p>
+        </div>
+        <div class="objective-item">
+          <h3>Interface Moderna</h3>
+          <p>Criar uma interface de usuário moderna e responsiva</p>
+        </div>
+        <div class="objective-item">
+          <h3>Funcionalidade Completa</h3>
+          <p>Desenvolver um sistema completo de gerenciamento de tarefas</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div> 

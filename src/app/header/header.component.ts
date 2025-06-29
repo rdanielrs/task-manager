@@ -1,17 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { TaskService } from '../services/task.service';
 
 export interface HeaderEvent {
-  type: 'navigation' | 'newTask' | 'search';
+  type: 'newTask' | 'search';
   data?: any;
 }
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,11 +25,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   // Estado do componente
-  public activeNavItem = 'home';
   public notificationCount = 0;
   public searchQuery = '';
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // Inscrever-se nas estatísticas das tarefas para atualizar contagem de notificações
@@ -50,15 +53,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  // Lidar com cliques de navegação
-  public onNavClick(navItem: string): void {
-    this.activeNavItem = navItem;
-    this.headerEvents.next({
-      type: 'navigation',
-      data: { navItem }
-    });
-  }
-
   // Lidar com clique no botão nova tarefa
   public onNewTaskClick(): void {
     this.headerEvents.next({
@@ -75,5 +69,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       type: 'search',
       data: { query }
     });
+  }
+
+  // Verificar se a rota atual está ativa
+  public isActiveRoute(route: string): boolean {
+    return this.router.url === route || 
+           (route === '/home' && this.router.url === '/');
   }
 } 
