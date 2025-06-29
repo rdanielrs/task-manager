@@ -1,0 +1,182 @@
+<!-- Componente Cabeçalho -->
+<app-header></app-header>
+
+<!-- Conteúdo Principal -->
+<main class="main-content">
+  <div class="container">
+    <section class="welcome-section">
+      <h2>Bem-vindo ao Gerenciador de Tarefas</h2>
+      <p>Organize suas tarefas e aumente sua produtividade</p>
+    </section>
+    
+    <section class="quick-stats">
+      <div class="stat-card">
+        <h3>Total de Tarefas</h3>
+        <p class="stat-number">{{ taskStats.total }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Pendentes</h3>
+        <p class="stat-number">{{ taskStats.pending }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Em Andamento</h3>
+        <p class="stat-number">{{ taskStats.inProgress }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Concluídas</h3>
+        <p class="stat-number">{{ taskStats.completed }}</p>
+      </div>
+    </section>
+
+    <!-- Formulário de Nova Tarefa -->
+    <section class="new-task-section" *ngIf="showNewTaskForm">
+      <div class="form-container">
+        <h3>Criar Nova Tarefa</h3>
+        <form (ngSubmit)="createTask()" #taskForm="ngForm">
+          <div class="form-group">
+            <label for="title">Título *</label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title"
+              [(ngModel)]="newTask.title" 
+              required
+              class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Descrição</label>
+            <textarea 
+              id="description" 
+              name="description"
+              [(ngModel)]="newTask.description" 
+              rows="3"
+              class="form-input"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="priority">Prioridade</label>
+              <select 
+                id="priority" 
+                name="priority"
+                [(ngModel)]="newTask.priority" 
+                class="form-input">
+                <option value="low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dueDate">Data de Vencimento</label>
+              <input 
+                type="date" 
+                id="dueDate" 
+                name="dueDate"
+                [(ngModel)]="newTask.dueDate" 
+                class="form-input">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="assignedTo">Atribuído Para</label>
+              <input 
+                type="text" 
+                id="assignedTo" 
+                name="assignedTo"
+                [(ngModel)]="newTask.assignedTo" 
+                class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="tags">Tags (separadas por vírgula)</label>
+              <input 
+                type="text" 
+                id="tags" 
+                name="tags"
+                [(ngModel)]="newTask.tags" 
+                placeholder="trabalho, urgente, projeto"
+                class="form-input">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="cancelNewTask()">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="!taskForm.form.valid">
+              Criar Tarefa
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Lista de Tarefas -->
+    <section class="tasks-section">
+      <div class="tasks-header">
+        <h3>Tarefas ({{ filteredTasks.length }})</h3>
+        <div class="tasks-actions">
+          <button class="btn btn-primary" (click)="showNewTaskForm = true" *ngIf="!showNewTaskForm">
+            Adicionar Nova Tarefa
+          </button>
+        </div>
+      </div>
+
+      <div class="tasks-list" *ngIf="filteredTasks.length > 0; else noTasks">
+        <div class="task-card" *ngFor="let task of filteredTasks">
+          <div class="task-header">
+            <h4 class="task-title">{{ task.title }}</h4>
+            <div class="task-badges">
+              <span class="badge priority-badge" [style.background-color]="getPriorityColor(task.priority)">
+                {{ task.priority === 'high' ? 'Alta' : task.priority === 'medium' ? 'Média' : 'Baixa' }}
+              </span>
+              <span class="badge status-badge" [style.background-color]="getStatusColor(task.status)">
+                {{ task.status === 'completed' ? 'Concluída' : task.status === 'in-progress' ? 'Em Andamento' : 'Pendente' }}
+              </span>
+            </div>
+          </div>
+
+          <p class="task-description" *ngIf="task.description">{{ task.description }}</p>
+
+          <div class="task-meta">
+            <div class="task-info">
+              <span class="task-date" *ngIf="task.dueDate">
+                Vencimento: {{ formatDate(task.dueDate) }}
+              </span>
+              <span class="task-assignee" *ngIf="task.assignedTo">
+                Atribuído para: {{ task.assignedTo }}
+              </span>
+            </div>
+
+            <div class="task-tags" *ngIf="task.tags && task.tags.length > 0">
+              <span class="tag" *ngFor="let tag of task.tags">{{ tag }}</span>
+            </div>
+          </div>
+
+          <div class="task-actions">
+            <select 
+              [value]="task.status" 
+              (change)="updateTaskStatus(task.id, $any($event.target).value)"
+              class="status-select">
+              <option value="pending">Pendente</option>
+              <option value="in-progress">Em Andamento</option>
+              <option value="completed">Concluída</option>
+            </select>
+            <button class="btn btn-danger" (click)="deleteTask(task.id)">
+              Excluir
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noTasks>
+        <div class="no-tasks">
+          <p>Nenhuma tarefa encontrada. Crie sua primeira tarefa para começar!</p>
+        </div>
+      </ng-template>
+    </section>
+  </div>
+</main>

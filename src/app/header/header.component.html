@@ -1,0 +1,67 @@
+<!-- Cabeçalho -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <h1>Gerenciador de Tarefas</h1>
+    </div>
+    
+    <!--<nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" 
+             class="nav-link" 
+             [class.active]="activeNavItem === 'home'"
+             (click)="onNavClick('home'); $event.preventDefault()">
+            Início
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" 
+             class="nav-link" 
+             [class.active]="activeNavItem === 'tasks'"
+             (click)="onNavClick('tasks'); $event.preventDefault()">
+            Tarefas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" 
+             class="nav-link" 
+             [class.active]="activeNavItem === 'projects'"
+             (click)="onNavClick('projects'); $event.preventDefault()">
+            Projetos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" 
+             class="nav-link" 
+             [class.active]="activeNavItem === 'profile'"
+             (click)="onNavClick('profile'); $event.preventDefault()">
+            Perfil
+          </a>
+        </li>
+      </ul>
+    </nav>-->
+
+    <div class="header-actions">
+      <!-- Barra de Pesquisa -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          placeholder="Pesquisar tarefas..." 
+          class="search-input"
+          [value]="searchQuery"
+          (input)="onSearchChange($any($event.target).value)">
+      </div>
+
+      <!-- Notificações -->
+      <!-- <div class="notification-badge" *ngIf="notificationCount > 0">
+        <span class="notification-count">{{ notificationCount }}</span>
+      </div> -->
+
+      <!-- Botão Nova Tarefa -->
+      <button class="btn btn-primary" (click)="onNewTaskClick()">
+        Nova Tarefa
+      </button>
+    </div>
+  </div>
+</header> 

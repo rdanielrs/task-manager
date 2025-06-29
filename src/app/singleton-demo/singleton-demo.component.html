@@ -1,0 +1,92 @@
+<div class="singleton-demo">
+  <div class="demo-header">
+    <h2>Demonstração do Padrão Singleton</h2>
+    <p>Este componente demonstra como o padrão Singleton funciona na prática</p>
+  </div>
+
+  <div class="demo-section">
+    <h3>Verificação de Instância Única</h3>
+    <div class="instance-check">
+      <p><strong>Instância 1:</strong> {{ configInstance1 | json }}</p>
+      <p><strong>Instância 2:</strong> {{ configInstance2 | json }}</p>
+      <p class="result" [class.same]="areSameInstance">
+        <strong>Resultado:</strong> 
+        {{ areSameInstance ? '✅ São a mesma instância!' : '❌ São instâncias diferentes' }}
+      </p>
+    </div>
+    <button class="btn btn-primary" (click)="demonstrateSingleton()">
+      Verificar no Console
+    </button>
+  </div>
+
+  <div class="demo-section">
+    <h3>Configuração Atual</h3>
+    <div class="config-display">
+      <div class="config-item">
+        <strong>Nome do App:</strong> {{ currentConfig.appName }}
+      </div>
+      <div class="config-item">
+        <strong>Versão:</strong> {{ currentConfig.version }}
+      </div>
+      <div class="config-item">
+        <strong>Tema:</strong> {{ currentConfig.theme }}
+      </div>
+      <div class="config-item">
+        <strong>Idioma:</strong> {{ currentConfig.language }}
+      </div>
+      <div class="config-item">
+        <strong>Máximo de Tarefas:</strong> {{ currentConfig.maxTasks }}
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Alterar Configurações</h3>
+    <div class="config-controls">
+      <div class="control-group">
+        <label for="theme">Tema:</label>
+        <select id="theme" [(ngModel)]="newTheme" class="form-select">
+          <option value="light">Claro</option>
+          <option value="dark">Escuro</option>
+        </select>
+        <button class="btn btn-secondary" (click)="changeTheme()">
+          Alterar Tema
+        </button>
+      </div>
+
+      <div class="control-group">
+        <label for="language">Idioma:</label>
+        <select id="language" [(ngModel)]="newLanguage" class="form-select">
+          <option value="pt-BR">Português (BR)</option>
+          <option value="en-US">English (US)</option>
+          <option value="es-ES">Español</option>
+        </select>
+        <button class="btn btn-secondary" (click)="changeLanguage()">
+          Alterar Idioma
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Teste de Proteção</h3>
+    <p>Tente criar uma nova instância do Singleton:</p>
+    <button class="btn btn-danger" (click)="tryCreateNewInstance()">
+      Tentar Criar Nova Instância
+    </button>
+    <p class="note">* Isso deve falhar porque o construtor é privado</p>
+  </div>
+
+  <div class="demo-section">
+    <h3>Como Funciona o Singleton</h3>
+    <div class="explanation">
+      <h4>Características do Padrão Singleton:</h4>
+      <ul>
+        <li><strong>Construtor Privado:</strong> Impede a criação direta de instâncias</li>
+        <li><strong>Instância Estática:</strong> Armazena a única instância da classe</li>
+        <li><strong>Método getInstance():</strong> Retorna a instância única</li>
+        <li><strong>Estado Compartilhado:</strong> Todas as referências apontam para o mesmo objeto</li>
+      </ul>
+    </div>
+  </div>
+</div> 

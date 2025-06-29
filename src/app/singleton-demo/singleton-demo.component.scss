@@ -1,0 +1,207 @@
+// Variáveis
+$primary-color: #3b82f6;
+$secondary-color: #64748b;
+$background-color: #f8fafc;
+$white: #ffffff;
+$gray-100: #f1f5f9;
+$gray-200: #e2e8f0;
+$gray-300: #cbd5e1;
+$gray-600: #475569;
+$gray-800: #1e293b;
+$red-500: #ef4444;
+$green-500: #10b981;
+$shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+.singleton-demo {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.demo-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: $white;
+  border-radius: 0.5rem;
+  box-shadow: $shadow-sm;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $gray-600;
+    font-size: 1.125rem;
+  }
+}
+
+.demo-section {
+  background-color: $white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: $shadow-sm;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    color: $gray-800;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.instance-check {
+  background-color: $gray-100;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+
+  p {
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+  }
+
+  .result {
+    font-weight: bold;
+    font-size: 1rem;
+    
+    &.same {
+      color: $green-500;
+    }
+  }
+}
+
+.config-display {
+  display: grid;
+  gap: 0.75rem;
+
+  .config-item {
+    background-color: $gray-100;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border-left: 3px solid $primary-color;
+  }
+}
+
+.config-controls {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  label {
+    font-weight: 500;
+    color: $gray-800;
+    min-width: 80px;
+  }
+
+  .form-select {
+    padding: 0.5rem;
+    border: 1px solid $gray-300;
+    border-radius: 0.375rem;
+    background-color: $white;
+    min-width: 150px;
+  }
+}
+
+.note {
+  font-size: 0.875rem;
+  color: $gray-600;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.explanation {
+  background-color: $gray-100;
+  padding: 1rem;
+  border-radius: 0.375rem;
+
+  h4 {
+    color: $gray-800;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid $gray-200;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      strong {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+// Botões
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+
+  &.btn-primary {
+    background-color: $primary-color;
+    color: $white;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $gray-200;
+    color: $gray-800;
+
+    &:hover {
+      background-color: $gray-300;
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-danger {
+    background-color: $red-500;
+    color: $white;
+
+    &:hover {
+      background-color: darken($red-500, 10%);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Design responsivo
+@media (max-width: 768px) {
+  .singleton-demo {
+    padding: 1rem;
+  }
+
+  .control-group {
+    flex-direction: column;
+    align-items: stretch;
+
+    label {
+      min-width: auto;
+    }
+  }
+} 
